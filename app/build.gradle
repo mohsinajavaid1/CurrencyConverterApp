@@ -16,6 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
 
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary true
@@ -23,7 +24,15 @@ android {
     }
 
     buildTypes {
+
+        debug {
+            buildConfigField("String", "BASE_URL", "\"https://api.freecurrencyapi.com/\"")
+            buildConfigField("String", "API_KEY", "\"fca_live_rMgXbsjiWaSJXh1GU2bnck2muQJvmwYC48kOrFoa\"")
+        }
+
         release {
+            buildConfigField("String", "BASE_URL", "\"https://api.freecurrencyapi.com/\"")
+            buildConfigField("String", "API_KEY", "\"fca_live_rMgXbsjiWaSJXh1GU2bnck2muQJvmwYC48kOrFoa\"")
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
