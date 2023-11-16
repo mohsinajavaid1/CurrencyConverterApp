@@ -26,8 +26,8 @@ android {
     buildTypes {
 
         debug {
-            buildConfigField("String", "BASE_URL", "\"https://api.freecurrencyapi.com/\"")
-            buildConfigField("String", "API_KEY", "\"fca_live_rMgXbsjiWaSJXh1GU2bnck2muQJvmwYC48kOrFoa\"")
+            buildConfigField("String", "BASE_URL", "\"https://api.currencyfreaks.com/\"")
+            buildConfigField("String", "API_KEY", "\"bd6cfbffbd554214bcab927164fabe4c\"")
         }
 
         release {

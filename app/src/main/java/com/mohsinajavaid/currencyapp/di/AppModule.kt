@@ -1,5 +1,7 @@
 package com.mohsinajavaid.currencyapp.di
 
+import com.mohsinajavaid.currencyapp.BuildConfig
+import com.mohsinajavaid.currencyapp.data.CurrencyConversionAPI
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -36,10 +38,16 @@ object AppModule {
         gsonConverterFactory: GsonConverterFactory
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("")
+            .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(gsonConverterFactory)
             .client(okHttpClient)
             .build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideCurrencyRatesApi(retrofit: Retrofit): CurrencyConversionAPI {
+        return retrofit.create(CurrencyConversionAPI::class.java)
     }
 
 
