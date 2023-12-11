@@ -1,5 +1,6 @@
 package com.mohsinajavaid.currencyapp
 
+import SyncingWorker
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -240,6 +241,9 @@ class MainActivity() : ComponentActivity() {
                                             "${getOutputString(amount * toValue)} ${toCurrencyCode.value}"
                                         singleConvertedAmount.value =
                                             "1 ${fromCurrencyCode.value} = ${getOutputString(toValue)} ${toCurrencyCode.value}"
+
+
+                                        SyncingWorker.enqueuePeriodicWork()
                                     }
                                 }
                                 is NetworkResult.Error -> {

@@ -1,10 +1,16 @@
 package com.mohsinajavaid.currencyapp.di
 
+import android.content.Context
 import com.mohsinajavaid.currencyapp.BuildConfig
 import com.mohsinajavaid.currencyapp.data.CurrencyConversionAPI
+import com.mohsinajavaid.currencyapp.data.CurrencyDataSource
+import com.mohsinajavaid.currencyapp.data.DataStoreManager
+import com.mohsinajavaid.currencyapp.data.Repository
+import com.mohsinajavaid.currencyapp.utils.NetworkUtils
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -49,6 +55,21 @@ object AppModule {
     fun provideCurrencyRatesApi(retrofit: Retrofit): CurrencyConversionAPI {
         return retrofit.create(CurrencyConversionAPI::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideDataStoreManager(@ApplicationContext context: Context) = DataStoreManager(context)
+
+    @Provides
+    @Singleton
+    fun provideNetworkUtils(@ApplicationContext context: Context) = NetworkUtils(context)
+
+    @Provides
+    @Singleton
+    fun provideCurrencyDataStore(currencyRatesApi:CurrencyConversionAPI,networkUtils:NetworkUtils) = CurrencyDataSource(currencyRatesApi , networkUtils)
+    @Provides
+    @Singleton
+    fun provideRepository(currencyDataSource: CurrencyDataSource) = Repository(currencyDataSource)
 
 
 }
